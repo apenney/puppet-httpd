@@ -1,0 +1,6 @@
+LoadPlugin apache
+<Plugin "apache">
+ <Instance "httpd-<%= fqdn %>">
+   URL "http://<%= fqdn %>/mod_status?auto";
+ </Instance>
+</Plugin>

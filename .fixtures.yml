@@ -1,0 +1,8 @@
+fixtures:
+  symlinks:
+    httpd: "#{source_dir}"
+    collectd: "../../../../collectd"
+    passenger: "../../../../passenger"
+    puppet: "../../../../puppet"
+    firewall: "../../../../firewall"
+    hiera: "../../../../hiera"

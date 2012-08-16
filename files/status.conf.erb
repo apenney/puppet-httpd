@@ -1,0 +1,7 @@
+ExtendedStatus on
+<IfModule mod_status.c>
+  <Location /mod_status>
+    SetHandler server-status
+    Require local
+  </Location>
+</IfModule>
