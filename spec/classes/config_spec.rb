@@ -40,20 +40,20 @@ describe 'httpd::config', :type => :class do
       :key => '',
     }}
     it 'should fail' do
-      expect raise_error(Puppet::Error, /You must pass in either/)
+      expect raise_error(Puppet::Error, /certificate and key parameters must be non-empty/)
     end
   end
   context 'when ssl is enabled and both certificate and key are set' do
     let(:params) {{
       :ssl => 'present',
       :passenger => 'absent',
-      :certificate => 'httpd/cert.pem',
-      :key => 'httpd/cert.key',
+      :certificate => 'httpd/certs/cert.pem',
+      :key => 'httpd/certs/cert.key',
     }}
     it 'should include httpd::config::ssl successfully' do
       should contain_class('httpd::config::ssl').with({
-        'certificate' => 'httpd/cert.pem',
-        'key'         => 'httpd/cert.key',
+        'certificate' => 'httpd/certs/cert.pem',
+        'key'         => 'httpd/certs/cert.key',
       })
     end
   end

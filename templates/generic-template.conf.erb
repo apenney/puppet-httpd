@@ -1,11 +1,14 @@
-<VirtualHost <%= "#{name} %>:80>
+<VirtualHost <%= "#{name}" %>:80>
 ServerAdmin          <%= admin %>
 DocumentRoot         <%= docroot %>
 ServerName           <%= name %>
 <% aliases.each do |al| -%>
 ServerAlias          <%= al %>
 <% end -%>
-<% if rails -%>
-Railsautodetect on
+<% if scope.lookupvar('httpd::ssl' == 'present' -%>
+  SSL content.
+<% end -%>
+<% if scope.lookupvar('httpd::mod_wsgi' == 'present' -%>
+  WSGI content.
 <% end -%>
 </VirtualHost>    

@@ -1,9 +1,23 @@
-class httpd::service {
+class httpd::service(
+  $subscribes,
+  $requires
+) {
 
   service { 'httpd':
     ensure  => true,
     enable  => true,
-    require => [ Class['httpd::config'], Class['httpd::install'] ],
+  }
+
+  if $requires != '' {
+    Service['httpd'] {
+      require +> $requires,
+    }
+  }
+
+  if $subscribes != '' {
+    Service['httpd'] {
+      subscribe +> $subscribes,
+    }
   }
 
 }

@@ -1,14 +1,14 @@
 class httpd::config(
   $ssl,
   $passenger,
-  $certificate = '',
-  $key = '',
-) {
+  $certificate,
+  $key,
+) inherits httpd::params {
 
   # TODO: Improve this.
   if $ssl == 'present' {
     if ($certificate == '') or ($key == '') {
-      err('You must pass in either $certificate or $key to httpd::site{} when using ssl')
+      err('certificate and key parameters must be non-empty')
     } else {
       class { 'httpd::config::ssl':
         certificate => $certificate,
@@ -24,11 +24,14 @@ class httpd::config(
   }
 
   # Enable mod_status.
-  file { '/etc/httpd/conf.d/status.conf':
+  file { "${httpd::params::confdir}/status.conf":
     ensure => present,
     source => 'puppet:///modules/httpd/status.conf.erb',
     notify => Class['httpd::service'],
   }
+
+  # Ensure collectd is actually enabled.
+  include collectd::client
 
   collectd::add_monitor { 'apache':
     ensure          => 'present',
