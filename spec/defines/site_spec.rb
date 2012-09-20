@@ -3,18 +3,27 @@ require 'spec_helper'
 describe 'httpd::site' do
   let(:params) {
     {
-      :name      => 'test.site.com',
-      :template  => 'httpd/generic-template.conf.erb',
-      :passenger => 'present',
-      :ssl       => 'present',
+      :name        => 'test.site.com',
+      :template    => 'httpd/generic-template.conf.erb',
+      :passenger   => 'present',
+      :ssl         => 'present',
+      :mod_wsgi    => 'present',
+      :certificate => 'test.site.com.cert',
+      :key         => 'test.site.com.key',
+      :subscribes  => 'File[/tmp]',
+      :requires    => 'File[/]',
     }
   }
 
   it 'should ensure the httpd class is included' do
     contain_class('httpd').with({
-      'ssl'       => 'present',
-      'passenger' => 'present',
-      'mod_wsgi'  => 'present',
+      'ssl'         => 'present',
+      'passenger'   => 'present',
+      'mod_wsgi'    => 'present',
+      'certificate' => 'test.site.com.cert',
+      'key'         => 'test.site.com.key',
+      'subscribes'  => 'File[/tmp]',
+      'requires'    => 'File[/]',
     })
   end
 

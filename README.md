@@ -41,3 +41,5 @@ This is the main define that drives the module.  Mostly it takes in parameters a
 ### httpd::config::install_cert
 
 This define will push out the cert and key files you defined earlier.  It defines the resources as virtual and then realizes them elsewhere to help in cases where you're pushing multiple sites via hiera and some share the same certs.
+
+Written by Ashley Penney - apenney@perimeterusa.com
