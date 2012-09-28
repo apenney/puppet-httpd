@@ -5,6 +5,7 @@ define httpd::site(
   $passenger   = 'absent',
   $ssl         = 'absent',
   $mod_wsgi    = 'absent',
+  $admin       = 'syseng@perimeterusa.com',
   $certificate = '',
   $key         = '',
   $subscribes  = '',
@@ -14,7 +15,7 @@ define httpd::site(
   class { 'httpd':
     ssl       => $ssl,
     passenger => $passenger,
-    mod_wgi   => $mod_wsgi,
+    mod_wsgi   => $mod_wsgi,
   }
 
   file { "${httpd::params::confdir}/${name}.conf":

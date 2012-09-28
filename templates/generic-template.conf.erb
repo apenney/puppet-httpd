@@ -5,10 +5,10 @@ ServerName           <%= name %>
 <% aliases.each do |al| -%>
 ServerAlias          <%= al %>
 <% end -%>
-<% if scope.lookupvar('httpd::ssl' == 'present' -%>
+<% if scope.lookupvar('httpd::ssl') == 'present' -%>
   SSL content.
 <% end -%>
-<% if scope.lookupvar('httpd::mod_wsgi' == 'present' -%>
+<% if scope.lookupvar('httpd::mod_wsgi') == 'present' -%>
   WSGI content.
 <% end -%>
 </VirtualHost>    
